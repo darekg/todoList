@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E54982A4208DAEDA00C153E1 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54982A3208DAEDA00C153E1 /* CategoryViewController.swift */; };
 		E5D98BB520871D0500D5973E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D98BB420871D0500D5973E /* AppDelegate.swift */; };
 		E5D98BB720871D0500D5973E /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D98BB620871D0500D5973E /* TodoListViewController.swift */; };
 		E5D98BBA20871D0500D5973E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5D98BB820871D0500D5973E /* Main.storyboard */; };
 		E5D98BBD20871D0500D5973E /* todoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5D98BBB20871D0500D5973E /* todoList.xcdatamodeld */; };
 		E5D98BBF20871D0600D5973E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5D98BBE20871D0600D5973E /* Assets.xcassets */; };
 		E5D98BC220871D0600D5973E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5D98BC020871D0600D5973E /* LaunchScreen.storyboard */; };
-		E5D98BCA2087544600D5973E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D98BC92087544600D5973E /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E54982A3208DAEDA00C153E1 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		E5D98BB120871D0500D5973E /* todoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5D98BB420871D0500D5973E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5D98BB620871D0500D5973E /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
@@ -25,7 +26,6 @@
 		E5D98BBE20871D0600D5973E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5D98BC120871D0600D5973E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E5D98BC320871D0600D5973E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5D98BC92087544600D5973E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,6 @@
 				E5D98BCC2087546E00D5973E /* Controllers */,
 				E5D98BCE208754B800D5973E /* Supporting Files */,
 				E5D98BC320871D0600D5973E /* Info.plist */,
-				E5D98BBB20871D0500D5973E /* todoList.xcdatamodeld */,
 			);
 			path = todoList;
 			sourceTree = "<group>";
@@ -72,7 +71,7 @@
 		E5D98BCB2087545F00D5973E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E5D98BC92087544600D5973E /* Item.swift */,
+				E5D98BBB20871D0500D5973E /* todoList.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -80,6 +79,7 @@
 		E5D98BCC2087546E00D5973E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E54982A3208DAEDA00C153E1 /* CategoryViewController.swift */,
 				E5D98BB620871D0500D5973E /* TodoListViewController.swift */,
 			);
 			path = Controllers;
@@ -173,7 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5D98BCA2087544600D5973E /* Item.swift in Sources */,
+				E54982A4208DAEDA00C153E1 /* CategoryViewController.swift in Sources */,
 				E5D98BB720871D0500D5973E /* TodoListViewController.swift in Sources */,
 				E5D98BBD20871D0500D5973E /* todoList.xcdatamodeld in Sources */,
 				E5D98BB520871D0500D5973E /* AppDelegate.swift in Sources */,
