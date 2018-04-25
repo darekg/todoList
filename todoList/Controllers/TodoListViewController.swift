@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: SwipeTableViewController {
     
     var itemArray = [Item]()
     var selectedCategory: Category? {
@@ -33,7 +33,7 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         let item = itemArray[indexPath.row]
         
@@ -48,18 +48,53 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //for delete item
-        
-//        context.delete(itemArray[indexPath.row])
-//        itemArray.remove(at: indexPath.row)
-        
-        
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
         saveItems()
         
+        tableView.reloadData()
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    //MARK: - Model Manipulation Methods
+    
+    func saveItems() {
+        do {
+            try context.save()
+        } catch {
+            print("error saving context\(error)")
+        }
+    }
+    
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("error fetching data from context \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    //MARK: Delete Data From Swipe
+    
+    override func updateModel(at indexPath: IndexPath) {
+        
+        context.delete(self.itemArray[indexPath.row])
+        itemArray.remove(at: indexPath.row)
+        
+        saveItems()
     }
     
     //MARK: - Add New Items
@@ -81,6 +116,7 @@ class TodoListViewController: UITableViewController {
             self.itemArray.append(newItem)
             
             self.saveItems()
+            self.tableView.reloadData()
         }
         
         alert.addTextField { (alertTextField) in
@@ -93,41 +129,6 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
-    //MARK: - Model Manipulation Methods
-    
-    func saveItems() {
-        do {
-            try context.save()
-        } catch {
-            print("error saving context\(error)")
-        }
-        
-        tableView.reloadData()
-    }
-    
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
-        
-        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
-        
-        if let additionalPredicate = predicate {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
-        } else {
-            request.predicate = categoryPredicate
-        }
-    
-        
-        do {
-           itemArray = try context.fetch(request)
-        } catch {
-            print("error fetching data from context \(error)")
-        }
-        
-        tableView.reloadData()
-    }
-
-    
-
 }
 
 //MARK: - Search bar Methods

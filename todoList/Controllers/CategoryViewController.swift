@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeTableViewController {
     
     var categoryArray = [Category]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -18,6 +18,7 @@ class CategoryViewController: UITableViewController {
         super.viewDidLoad()
   
         loadCategories()
+        
     }
 
     //MARK: - TableView DataSource Methods
@@ -26,13 +27,12 @@ class CategoryViewController: UITableViewController {
         return categoryArray.count
     }
     
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
-
-        let category = categoryArray[indexPath.row]
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        cell.textLabel?.text = category.name
+        cell.textLabel?.text = categoryArray[indexPath.row].name
         
         return cell
     }
@@ -52,6 +52,40 @@ class CategoryViewController: UITableViewController {
             destinationVC.selectedCategory = categoryArray[indexPath.row]
         }
     }
+    
+    //MARK: - TableView Data Manipulation Methods
+    
+    func saveCategories() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+        
+    }
+    
+    func loadCategories() {
+        
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        do {
+            categoryArray = try context.fetch(request)
+        } catch {
+            print("Error loading categories \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    //MARK: Delete Data From Swipe
+    
+    override func updateModel(at indexPath: IndexPath) {
+        
+        context.delete(self.categoryArray[indexPath.row])
+        categoryArray.remove(at: indexPath.row)
+        
+        saveCategories()
+    }
    
     
     //MARK: - Add New Categories
@@ -70,6 +104,7 @@ class CategoryViewController: UITableViewController {
             self.categoryArray.append(newCategory)
             
             self.saveCategories()
+            self.tableView.reloadData()
         }
         
         alert.addTextField { (alertTextField) in
@@ -82,34 +117,8 @@ class CategoryViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-
-     //MARK: - TableView Data Manipulation Methods
-    
-    func saveCategories() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context \(error)")
-        }
-
-        tableView.reloadData()
-    }
-    
-    func loadCategories() {
-        
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        
-        do {
-            categoryArray = try context.fetch(request)
-        } catch {
-            print("Error loading categories \(error)")
-        }
-        
-        tableView.reloadData()
-    }
-    
-    
 }
+
 
 
 
