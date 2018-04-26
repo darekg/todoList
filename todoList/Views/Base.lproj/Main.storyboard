@@ -42,18 +42,20 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Todo" id="8bQ-9i-xWh">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xr5-tp-hUG">
-                            <color key="tintColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="8Ji-5S-Fn0" id="cRq-IW-1X1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="hXF-hl-szx" id="fwd-1a-JZP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifS-FL-78x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1489" y="155"/>
         </scene>
-        <!--Category View Controller-->
+        <!--Todo List-->
         <scene sceneID="WgK-qt-bzF">
             <objects>
                 <tableViewController id="Ldk-JA-K2E" customClass="CategoryViewController" customModule="todoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,9 +78,8 @@
                             <outlet property="delegate" destination="Ldk-JA-K2E" id="4u5-UR-69U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="TMK-lT-ERK">
+                    <navigationItem key="navigationItem" title="Todo List" id="TMK-lT-ERK">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wsR-Ig-RV8">
-                            <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="Ldk-JA-K2E" id="abt-o6-giP"/>
                             </connections>
@@ -97,8 +98,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bsW-SH-hlQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rcD-G6-PIk">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="rcD-G6-PIk">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
