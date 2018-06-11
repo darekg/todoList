@@ -55,8 +55,6 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         //update data model
     }
     
-    
-    
-    
+
     
 }

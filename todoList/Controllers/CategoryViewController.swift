@@ -52,8 +52,6 @@ class CategoryViewController: SwipeTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToItems", sender: self)
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

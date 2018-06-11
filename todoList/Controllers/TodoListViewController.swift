@@ -29,25 +29,21 @@ class TodoListViewController: SwipeTableViewController {
         tableView.separatorStyle = .none
         
     }
+    // I use viewWillAppear func to setup navbar because in viewDidLoad navigationController doesn't exist. It's too early, so i can't set a color.
     
-    // uzylem viewWillAppear dlatego ze navigationController w funkcji viewDidLoad jeszcze nie istnieje, jest to za wczesnie wiec nie mozna przypisac mu koloru ani z nim pracowac
     override func viewWillAppear(_ animated: Bool) {
-        
         title = selectedCategory?.name
-        
         guard let colorHex = selectedCategory?.backgroundColor else { fatalError() }
-        
         updateNavBar(withHexCode: colorHex)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         updateNavBar(withHexCode: "1D9BF6")
     }
     
     //MARK: - NavBar Setup Methods
     
-    // zrobilismy ta funkcje zeby nie powtarzac kodu w viewWillAppear i viewWillDisappear
+    // function to don't repeating code in two places: viewWillAppear and viewWillDisappear
     
     func updateNavBar(withHexCode colorHexCode: String) {
         
@@ -62,6 +58,7 @@ class TodoListViewController: SwipeTableViewController {
         
         searchBar.barTintColor = navBarColor
     }
+    
 
     //MARK: - TableView DataSource Methods
     
@@ -181,18 +178,17 @@ extension TodoListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        // request pobieramy zapisane itemy, predicate - co chcemy wyszukac - title Contains text wpisany w searchbara, cd oznacza ze case (wielkosc) i diacritic (znaki specjalne dla jezyka np ę dla pl)
-        
-        //sortdescriptors nasz request chcemy uporzadkowac alfabetycznie
-        // okej mamy nasz sformatowany nowy request teraz musimy go uzyc, czyli uzyc na naszej calej tablicy z itemami, wiec nadpisujemy itemArray nowym requestem
-        
         let request: NSFetchRequest<Item> = Item.fetchRequest()
+        //fetch all items
         
         let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        //what are we looking for to search, cd means: case and diacritic(special keys for language, ex: ę, ą) are not important
         
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        //this is to make our request in alphabetical order
         
         loadItems(with: request, predicate: predicate)
+        //loadItems with new data
         
     }
     
